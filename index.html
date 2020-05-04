@@ -8,6 +8,48 @@
   </head>
 
   <body>
-    <img width="200" src="./turtle.png" alt="Turt" class="turt" />
+    <style>
+      .turtle {
+        position: relative;
+        --x: 10px;
+        --y: 10px;
+        transform: translateX(var(--x)) translateY(var(--y));
+      }
+    </style>
+    <img width="200" src="./turtle.png" alt="Turt" class="turtle" />
+
+    <script>
+      const turtle = document.querySelector('.turtle')
+      let x = 0
+      let y = 0
+
+      function handleKeyDown(event) {
+        // if it's not an arrow key, we don't care
+        if (!event.key.includes('Arrow')) return
+
+        switch (event.key) {
+          case 'ArrowUp':
+            y--
+            break
+          case 'ArrowDown':
+            y++
+            break
+          case 'ArrowLeft':
+            x--
+            break
+          case 'ArrowRight':
+            x++
+            break
+
+          default:
+            console.log('That is not a valid move')
+            break
+        }
+
+        turtle.setAttribute('style', `--x: ${x}px; --y: ${y}px`)
+      }
+
+      window.addEventListener('keydown', handleKeyDown)
+    </script>
   </body>
 </html>
